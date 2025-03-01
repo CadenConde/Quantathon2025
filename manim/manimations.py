@@ -2,7 +2,7 @@ from manim import *
 
 """
 use this command to run the manim file in terminal
-manim -pql manim/manimations.py demo
+manim -pql manim/manimations.py ThreePlanesScene
 """
 
 class ThreePlanesScene(ThreeDScene):
