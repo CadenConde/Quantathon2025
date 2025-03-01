@@ -2,48 +2,33 @@ from manim import *
 
 """
 use this command to run the manim file in terminal
-manim -pql manim/manimations.py demo
+manim -pql manim/manimations.py ThreePlanesScene
 """
 
-class ThreePlanesScene(ThreeDScene):
+class ParametricSurfaceExample(ThreeDScene):
     def construct(self):
-        # Set up the 3D axes
+        # Create 3D axes
         axes = ThreeDAxes()
 
-        # Define three planes using ParametricSurface
-        plane1 = ParametricSurface(
-            lambda u, v: np.array([u, v, 1]),
-            u_range=[-3, 3],
-            v_range=[-3, 3],
-            resolution=(20, 20),
-            checkerboard_colors=[BLUE, BLUE_E],
-            fill_opacity=0.5
-        )
+        # Define the parametric function for the surface
+        def parametric_function(u, v):
+            x = u
+            y = v
+            z = np.sin(x) * np.cos(y)
+            return np.array([x, y, z])
 
-        plane2 = ParametricSurface(
-            lambda u, v: np.array([u, v, -u - v]),
+        # Create the surface
+        surface = Surface(
+            parametric_function,
             u_range=[-3, 3],
             v_range=[-3, 3],
             resolution=(20, 20),
-            checkerboard_colors=[RED, RED_E],
-            fill_opacity=0.5
         )
-
-        plane3 = ParametricSurface(
-            lambda u, v: np.array([u, v, 0.5 * u - v]),
-            u_range=[-3, 3],
-            v_range=[-3, 3],
-            resolution=(20, 20),
-            checkerboard_colors=[GREEN, GREEN_E],
-            fill_opacity=0.5
-        )
+        surface.set_style(fill_opacity=0.5, fill_color=BLUE)
 
         # Set the camera orientation
-        self.set_camera_orientation(phi=75 * DEGREES, theta=45 * DEGREES)
+        self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
 
-        # Add objects to scene
-        self.add(axes, plane1, plane2, plane3)
-
-        # Hold the scene
-        self.wait(3)
-
+        # Add the axes and surface to the scene
+        self.add(axes, surface)
+        self.wait(2)
