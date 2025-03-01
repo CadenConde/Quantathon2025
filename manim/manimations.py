@@ -1,5 +1,10 @@
 from manim import *
 
+"""
+use this command to run the manim file in terminal
+manim -pql manim/manimations.py demo
+"""
+
 class ThreePlanesScene(ThreeDScene):
     def construct(self):
         # Set up the 3D axes
