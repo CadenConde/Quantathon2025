@@ -2,6 +2,7 @@
 
 # Python env
 /.venv
+/.conda
 
 #generated media
 /manim/media
