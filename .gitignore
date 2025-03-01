@@ -4,6 +4,7 @@
 /.venv
 /venv
 /.conda
+__pycache__/
 
 #generated media
 /manim/media
