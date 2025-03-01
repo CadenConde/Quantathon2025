@@ -1,6 +1,8 @@
 import pandas as pd
-from bearbullsegments import segments, df
+from bearbullsegments import get_segments, df
 import matplotlib.pyplot as plt
+
+segments = get_segments(df)
 
 print("Detected segments:", segments)
 
@@ -10,7 +12,7 @@ for phase, s, e in segments:
     color = "green" if phase == "Bull" else "red"
     plt.plot(df["Date"].iloc[s:e + 1], df["S&P500"].iloc[s:e + 1], color=color, linewidth=2)
 
-plt.xlim(pd.Timestamp("2008-01-01"), pd.Timestamp("2023-12-31"))
+# plt.xlim(pd.Timestamp("2008-01-01"), pd.Timestamp("2023-12-31"))
 plt.ylim(700, 7000)
 plt.xlabel("Date")
 plt.ylabel("S&P 500 Index")
