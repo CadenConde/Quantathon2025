@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # Define the custom Sharpe Ratio loss function
 def sharpe_loss(y_true, y_pred):
     portfolio_return = y_pred * y_true  # Portfolio return = allocation * S&P 500 return
-    return -tf.reduce_mean(portfolio_return) / (tf.keras.backend.std(portfolio_return) + 1e-6)
+    return -tf.reduce_mean(portfolio_return) / (tf.keras.backend.std(portfolio_return) + 1e-3)
 
 # Load trained model with custom loss function
 try:
@@ -69,7 +69,7 @@ test_df["Bond Allocation (%)"] = (test_df["Bond Allocation"] * 100).round(2)
 # Define buy/sell signals based on allocation threshold
 test_df["Signal"] = np.where(test_df["Stock Allocation"] > 0.5, "BUY", "SELL")
 
-# Simulate portfolio value starting with $10,000
+# Simulate portfolio value starting with $10,000 (Model-Based Strategy)
 initial_investment = 10000
 portfolio_value = initial_investment
 portfolio_values = []
@@ -89,26 +89,38 @@ for _, row in test_df.iterrows():
 # Add portfolio value to DataFrame
 test_df["Portfolio Value ($)"] = portfolio_values
 
+# Simulate Buy and Hold Portfolio ($10,000 Fully Invested in Stocks)
+buy_hold_value = initial_investment
+buy_hold_values = []
+
+for return_rate in test_df["S&P500 Return"]:
+    buy_hold_value *= (1 + return_rate)  # Fully invested in stocks every day
+    buy_hold_values.append(buy_hold_value)
+
+# Add Buy-and-Hold Portfolio Value to DataFrame
+test_df["Buy & Hold Value ($)"] = buy_hold_values
+
 # Save results to CSV
 output_path = "predictions_2019_2022.csv"
-test_df[["Date", "Stock Allocation (%)", "Bond Allocation (%)", "Signal", "Portfolio Value ($)"]].to_csv(output_path, index=False)
+test_df[["Date", "Stock Allocation (%)", "Bond Allocation (%)", "Signal", "Portfolio Value ($)", "Buy & Hold Value ($)"]].to_csv(output_path, index=False)
 
 # Plot the portfolio value over time
 plt.figure(figsize=(12, 6))
-plt.plot(test_df["Date"], test_df["Portfolio Value ($)"], label="Portfolio Value", color="blue", linewidth=2)
+plt.plot(test_df["Date"], test_df["Portfolio Value ($)"], label="Model-Based Portfolio", color="blue", linewidth=2)
+plt.plot(test_df["Date"], test_df["Buy & Hold Value ($)"], label="Buy & Hold (100% Stocks)", color="red", linestyle="dashed", linewidth=2)
 plt.xlabel("Date")
 plt.ylabel("Portfolio Value ($)")
-plt.title("Portfolio Growth Over Time (2019-2022)")
+plt.title("Portfolio Growth Comparison (2019-2022)")
 plt.legend()
 plt.grid(True)
 
 # Save the plot
-plot_path = "portfolio_growth.png"
+plot_path = "portfolio_comparison.png"
 plt.savefig(plot_path, dpi=300)
 plt.show()
 
 print("\n📊 Sample Predictions:")
-print(test_df[["Date", "Stock Allocation (%)", "Bond Allocation (%)", "Signal", "Portfolio Value ($)"]].head(10))
+print(test_df[["Date", "Stock Allocation (%)", "Bond Allocation (%)", "Signal", "Portfolio Value ($)", "Buy & Hold Value ($)"]].head(10))
 
 print(f"\n✅ Predictions saved successfully: {output_path}")
-print(f"📈 Portfolio growth chart saved as: {plot_path}")
+print(f"📈 Portfolio comparison chart saved as: {plot_path}")
