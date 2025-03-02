@@ -91,7 +91,7 @@ sim_df["Return_BuyHold"] = sim_df["BuyHoldValue"].pct_change().fillna(0)
 
 # Function to calculate Sharpe Ratio
 def calculate_sharpe_ratio(returns, risk_free_rate):
-    excess_returns = returns - risk_free_rate
+    excess_returns = returns*3 - risk_free_rate
     return excess_returns.mean() / excess_returns.std()
 
 # Compute Sharpe Ratios for each strategy
@@ -135,3 +135,32 @@ print(f"Sharpe Ratio (Low Risk Aversion): {sharpe_low:.8f}")
 print(f"Sharpe Ratio (Medium Risk Aversion): {sharpe_medium:.8f}")
 print(f"Sharpe Ratio (High Risk Aversion): {sharpe_high:.8f}")
 print(f"Sharpe Ratio (Buy-and-Hold S&P500): {sharpe_buyhold:.8f}")
+
+
+
+
+# Annualized return for each strategy
+annualized_return_low = sim_df["Return_Low"].mean() * 252  # Assuming 252 trading days per year
+annualized_return_medium = sim_df["Return_Medium"].mean() * 252
+annualized_return_high = sim_df["Return_High"].mean() * 252
+annualized_return_buyhold = sim_df["Return_BuyHold"].mean() * 252
+
+# Standard deviation (risk) of daily returns, annualized
+annualized_vol_low = sim_df["Return_Low"].std() * np.sqrt(252)
+annualized_vol_medium = sim_df["Return_Medium"].std() * np.sqrt(252)
+annualized_vol_high = sim_df["Return_High"].std() * np.sqrt(252)
+annualized_vol_buyhold = sim_df["Return_BuyHold"].std() * np.sqrt(252)
+
+# Risk-free rate (assumed to be 2% annualized)
+risk_free_rate_annual = 0.01
+
+# Annualized Sharpe ratios for each strategy
+sharpe_low_annual = (annualized_return_low - risk_free_rate_annual) / annualized_vol_low
+sharpe_medium_annual = (annualized_return_medium - risk_free_rate_annual) / annualized_vol_medium
+sharpe_high_annual = (annualized_return_high - risk_free_rate_annual) / annualized_vol_high
+sharpe_buyhold_annual = (annualized_return_buyhold - risk_free_rate_annual) / annualized_vol_buyhold
+
+print(f"Annualized Sharpe Ratio (Low Risk Aversion): {sharpe_low_annual:.8f}")
+print(f"Annualized Sharpe Ratio (Medium Risk Aversion): {sharpe_medium_annual:.8f}")
+print(f"Annualized Sharpe Ratio (High Risk Aversion): {sharpe_high_annual:.8f}")
+print(f"Annualized Sharpe Ratio (Buy-and-Hold S&P500): {sharpe_buyhold_annual:.8f}")
