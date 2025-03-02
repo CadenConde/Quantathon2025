@@ -26,7 +26,9 @@ ax2.tick_params(axis="y", labelcolor="red")
 # Titles & Legend
 plt.title("S&P 500 vs. Bond Rate (2007-Present)", fontsize=14, fontweight="bold")
 fig.tight_layout()
-plt.show()
+
+# Save plot
+plt.savefig("sp500_vs_bond_rate.png", dpi=300, bbox_inches="tight")
 
 # 🎨 **Heatmap of Correlations**
 plt.figure(figsize=(8, 5))
@@ -34,4 +36,5 @@ corr = df.drop(columns=["Date"]).corr()
 sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
 
 plt.title("Feature Correlation Heatmap", fontsize=14, fontweight="bold")
-plt.show()
+
+plt.savefig("correlation_heatmap.png", dpi=300, bbox_inches="tight")
