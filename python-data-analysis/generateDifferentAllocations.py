@@ -15,9 +15,9 @@ risk_free_rate = 0.01         # 1% annual risk-free rate
 
 # Define risk aversion parameters for each level
 risk_aversion = {
-    "Low": .75,     # Less risk-averse → higher stock allocation
+    "Low": .25,     # Less risk-averse → higher stock allocation
     "Medium": 1,
-    "High": 2     # More risk-averse → lower stock allocation
+    "High": 4     # More risk-averse → lower stock allocation
 }
 
 # Function to compute stock allocation based on predicted risk and risk aversion coefficient A
