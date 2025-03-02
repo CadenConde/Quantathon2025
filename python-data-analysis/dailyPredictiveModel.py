@@ -31,19 +31,24 @@ y_train = train_df["S&P500 Return"].values  # Target (S&P 500 return)
 scaler = MinMaxScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 
-# Build a neural network model
+# Custom Sharpe Ratio loss function to encourage higher returns
+def sharpe_loss(y_true, y_pred):
+    portfolio_return = y_pred * y_true  # Portfolio return = allocation * S&P 500 return
+    return -tf.reduce_mean(portfolio_return) / (tf.keras.backend.std(portfolio_return) + 1e-6)  # Maximize risk-adjusted return
+
+# Build a more aggressive neural network model
 model = Sequential([
     Input(shape=(3,)),  # 3 input features: PrInc, PrDec, Bond Rate
-    Dense(16, activation='relu'),
-    Dense(16, activation='relu'),
-    Dense(1, activation='sigmoid')  # Output: allocation weight (0 to 1)
+    Dense(32, activation='relu'),  # Increase neurons for better feature learning
+    Dense(32, activation='relu'),
+    Dense(1, activation=None)  # Remove sigmoid to allow unrestricted allocation values
 ])
 
-# Compile the model
-model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+# Compile the model with the Sharpe Ratio loss function
+model.compile(optimizer='adam', loss=sharpe_loss, metrics=['mae'])
 
-# Train the model
-model.fit(X_train_scaled, y_train, epochs=50, batch_size=16, verbose=1)
+# Train the model for longer to capture better patterns
+model.fit(X_train_scaled, y_train, epochs=100, batch_size=16, verbose=1)
 
 # Save the scaler and model
 joblib.dump(scaler, "scaler.pkl")
