@@ -34,7 +34,7 @@ X_train_scaled = scaler.fit_transform(X_train)
 # Custom Sharpe Ratio loss function to encourage higher returns
 def sharpe_loss(y_true, y_pred):
     portfolio_return = y_pred * y_true  # Portfolio return = allocation * S&P 500 return
-    return -tf.reduce_mean(portfolio_return) / (tf.keras.backend.std(portfolio_return) + 1e-6)  # Maximize risk-adjusted return
+    return -tf.reduce_mean(portfolio_return) / (tf.keras.backend.std(portfolio_return) + 1e-3)  # Maximize risk-adjusted return
 
 # Build a more aggressive neural network model
 model = Sequential([
