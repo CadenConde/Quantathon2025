@@ -12,8 +12,8 @@ df = df.sort_values("Date").reset_index(drop=True)
 
 def get_segments(df):
     # Define thresholds for 20% change
-    drop_threshold = 0.8   # In a bull market, if price < 80% of the running maximum, the bull phase ends.
-    rise_threshold = 1.2   # In a bear market, if price > 120% of the running minimum, the bear phase ends.
+    drop_threshold = 0.81   # In a bull market, if price < 80% of the running maximum, the bull phase ends.
+    rise_threshold = 1.20   # In a bear market, if price > 120% of the running minimum, the bear phase ends.
 
 # We'll use a state machine approach.
     segments = []  # List of tuples: (phase, start_idx, end_idx)
