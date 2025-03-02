@@ -90,8 +90,9 @@ sharpe_buyhold = calculate_sharpe_ratio(sim_df["Return_BuyHold"], risk_free_rate
 # 6. Plot the Results
 # ------------------------------
 plt.figure(figsize=(12, 6))
-plt.plot(sim_df["Date"], sim_df["DynamicPortfolioValue_Optimal"], label="Optimal Allocation", color="green")
-plt.plot(sim_df["Date"], sim_df["DynamicPortfolioValue_BuyHold"], label="Buy-and-Hold (S&P 500)", color="black", linestyle="--")
+
+plt.plot(sim_df["Date"], sim_df["DynamicPortfolioValue_BuyHold"], label="Buy-and-Hold (S&P 500)", color="tab:blue")
+plt.plot(sim_df["Date"], sim_df["DynamicPortfolioValue_Optimal"], label="Optimal Allocation", color="tab:orange")
 
 # Add labels and title
 plt.xlabel("Date")
