@@ -13,15 +13,15 @@ fig, ax1 = plt.subplots(figsize=(12, 6))
 
 # Primary axis: S&P 500
 ax1.set_xlabel("Year")
-ax1.set_ylabel("S&P 500 Index", color="blue")
-ax1.plot(df["Date"], df["S&P500"], label="S&P 500", color="blue", alpha=0.7)
-ax1.tick_params(axis="y", labelcolor="blue")
+ax1.set_ylabel("S&P 500 Index", color="tab:blue")
+ax1.plot(df["Date"], df["S&P500"], label="S&P 500", color="tab:blue", alpha=0.7)
+ax1.tick_params(axis="y", labelcolor="tab:blue")
 
 # Secondary axis: Bond Rate
 ax2 = ax1.twinx()
-ax2.set_ylabel("Bond Rate (%)", color="red")
-ax2.plot(df["Date"], df["Bond Rate"], label="Bond Rate", color="red", linestyle="dashed", alpha=0.7)
-ax2.tick_params(axis="y", labelcolor="red")
+ax2.set_ylabel("Bond Rate (%)", color="tab:orange")
+ax2.plot(df["Date"], df["Bond Rate"], label="Bond Rate", color="tab:orange", linestyle="dashed", alpha=0.7)
+ax2.tick_params(axis="y", labelcolor="tab:orange")
 
 # Titles & Legend
 plt.title("S&P 500 vs. Bond Rate (2007-Present)", fontsize=14, fontweight="bold")

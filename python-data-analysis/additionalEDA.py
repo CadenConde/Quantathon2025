@@ -35,28 +35,3 @@ plt.show()
 merged_data = pd.merge(daily_data, weekly_probs, on='Date', how='inner')
 correlation = merged_data[['S&P500', 'PrInc', 'PrDec']].corr()
 print("Correlation Matrix:\n", correlation)
-
-# Bear Market Length Distribution
-bear_market_durations = []
-peak = daily_data['S&P500'].iloc[0]
-bear_start = None
-
-for i in range(1, len(daily_data)):
-    if daily_data['S&P500'].iloc[i] > peak:
-        peak = daily_data['S&P500'].iloc[i]  # Update peak if a new high is reached
-    if daily_data['S&P500'].iloc[i] <= peak * 0.8 and bear_start is None:
-        bear_start = daily_data['Date'].iloc[i]  # Start of bear market
-    if daily_data['S&P500'].iloc[i] >= peak * 0.9 and bear_start is not None:
-        duration = (daily_data['Date'].iloc[i] - bear_start).days
-        bear_market_durations.append(duration)
-        print(f"Bear market duration: {duration} days")
-        bear_start = None  # Reset after recovery
-
-print("All bear market durations:", bear_market_durations)
-
-plt.figure(figsize=(8, 5))
-plt.hist(bear_market_durations, bins=10, edgecolor='black', alpha=0.7, color='tab:blue')
-plt.xlabel('Duration (Days)')
-plt.ylabel('Frequency')
-plt.title('Bear Market Duration Distribution')
-plt.show()

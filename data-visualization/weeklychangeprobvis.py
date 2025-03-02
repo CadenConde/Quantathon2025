@@ -14,8 +14,8 @@ sns.set(style="whitegrid", font_scale=1.2)
 # 🎨 **Dual-Line Chart for `PrDec` & `PrInc`**
 plt.figure(figsize=(12, 6))
 
-plt.plot(df["Date"], df["PrDec"], label="Probability of -20% Decline", color="red", marker="o", linestyle="-", alpha=0.7)
-plt.plot(df["Date"], df["PrInc"], label="Probability of +20% Increase", color="green", marker="o", linestyle="-", alpha=0.7)
+plt.plot(df["Date"], df["PrDec"], label="Probability of -20% Decline", color="tab:orange", marker="o", linestyle="-", alpha=0.7)
+plt.plot(df["Date"], df["PrInc"], label="Probability of +20% Increase", color="tab:blue", marker="o", linestyle="-", alpha=0.7)
 
 # Titles & Labels
 plt.xlabel("Date")
