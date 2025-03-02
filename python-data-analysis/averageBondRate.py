@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load dataset
-file_path = "../data/DailyStockBondFloats.csv"
+file_path = "data/DailyStockBondFloats.csv"
 df = pd.read_csv(file_path, parse_dates=["Date"])
 
 # Filter data from 1/2/2019 to 12/30/2022
