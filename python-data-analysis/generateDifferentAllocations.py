@@ -3,7 +3,7 @@ import numpy as np
 
 # Load the data
 input_file = "../data/OptimalAllocations.csv"  # Ensure this file contains 'Date' and 'PredictedRisk' columns
-output_file = "../data/OptimalAllocations_WithDynamicRiskLevels.csv"
+output_file = "../data/OptimalAllocations_Optimized.csv"
 
 df = pd.read_csv(input_file, parse_dates=["Date"])
 df.sort_values("Date", inplace=True)
@@ -15,9 +15,10 @@ risk_free_rate = 0.01         # 1% annual risk-free rate
 
 # Define risk aversion parameters for each level
 risk_aversion = {
-    "Low": .25,     # Less risk-averse → higher stock allocation
-    "Medium": 1,
-    "High": 4     # More risk-averse → lower stock allocation
+    # "Low": .5,     # Less risk-averse → higher stock allocation
+    # "Medium": 1,
+    "Optimal": .685,
+    # "High": 2     # More risk-averse → lower stock allocation
 }
 
 # Function to compute stock allocation based on predicted risk and risk aversion coefficient A

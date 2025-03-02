@@ -136,6 +136,9 @@ print(f"Final Portfolio Value (Buy-and-Hold S&P500): ${final_buy_hold:.2f}")
 # print(f"Sharpe Ratio (High Risk Aversion): {sharpe_high:.8f}")
 # print(f"Sharpe Ratio (Buy-and-Hold S&P500): {sharpe_buyhold:.8f}")
 
+
+
+
 # Annualized return for each strategy
 annualized_return_low = sim_df["Return_Low"].mean() * 252  # Assuming 252 trading days per year
 annualized_return_medium = sim_df["Return_Medium"].mean() * 252
