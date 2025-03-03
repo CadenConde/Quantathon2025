@@ -55,7 +55,6 @@ df["PredictedRisk"] = model.predict(X_all_scaled)
 # ------------------------------
 # 5. Compute Optimal Allocation Using MPT (with bonds as risk-free)
 # ------------------------------
-# Assume:
 expected_stock_return = 0.10   # 10% annual return for stocks
 risk_free_rate = 0.01          # 1% annual for bonds
 
@@ -76,16 +75,3 @@ output_cols = ["Date", "PredictedRisk", "StockAllocation", "BondAllocation"]
 df[output_cols].to_csv(output_path, index=False)
 
 print(f"Optimal allocations saved to {output_path}")
-
-# ------------------------------
-# 7. Show the Volatility Formula (as Comment)
-# ------------------------------
-# The volatility based on the probabilities of >20% moves is computed as:
-#
-#     HistoricalVol = sqrt( PrDec * (0.20)^2 + PrInc * (0.20)^2 ) * sqrt(252)
-#
-# Where:
-#   - PrDec: probability that the S&P500 will drop more than 20% in 1 year.
-#   - PrInc: probability that the S&P500 will rise more than 20% in 1 year.
-#   - 0.20: represents a 20% move.
-#   - sqrt(252) annualizes the daily volatility (assuming 252 trading days per year).

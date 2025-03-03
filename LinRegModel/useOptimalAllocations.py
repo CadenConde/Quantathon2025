@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # ------------------------------
 # 1. Load Data from OptimalAllocations and DailyStockBondFloats
 # ------------------------------
-optimal_path = "../data/OptimalAllocations.csv"
+optimal_path = "../data/OptimalAllocations_Optimized.csv"
 daily_path = "../data/DailyStockBondFloats.csv"
 
 optimal_df = pd.read_csv(optimal_path, parse_dates=["Date"])
@@ -40,8 +40,8 @@ dynamic_values = []
 
 # Loop over simulation days; each day rebalance according to given allocations.
 for idx, row in sim_df.iterrows():
-    stock_alloc = row["StockAllocation"]
-    bond_alloc  = row["BondAllocation"]  # Assume this equals 1 - StockAllocation
+    stock_alloc = row["StockAllocation_Optimal"]
+    bond_alloc  = row["BondAllocation_Optimal"]  # Assume this equals 1 - StockAllocation
     # Daily portfolio return: weighted average of stock return and bond daily return.
     daily_return = stock_alloc * row["StockReturn"] + bond_alloc * bond_daily_return
     portfolio_value *= (1 + daily_return)

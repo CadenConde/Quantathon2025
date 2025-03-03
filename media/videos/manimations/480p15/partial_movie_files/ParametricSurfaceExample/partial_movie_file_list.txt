@@ -1,2 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/Users/auritro/ProjectsCode/Quantathon/Quantathon2025/media/videos/manimations/480p15/partial_movie_files/ParametricSurfaceExample/3028389898_2230675760_3173682227.mp4'
