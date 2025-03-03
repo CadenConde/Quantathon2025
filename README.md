@@ -14,20 +14,20 @@
 
 ## Data Analysis
 
-<img src="media/BearBullGraph2.png" />
+<img src="media/BearBullGraph2.png" height="300px"/>
 <p>We were able to find some correlations between the probabilities and market trends, as well as verify the accuracy of the provided predictions (97.39%). This gave us the confidence to move forward and use this data to train some AI/ML Models.<p>
 <p>To see our visualizations, check out and run the files in 'data-visualizations/'. To see our data analysis scripts, check out 'python-data-analysis/'.</p>
 
 ## Model 1: Linear Regression
 
-<img src="media/DifferentRisksGraph.png" />
+<img src="media/DifferentRisksGraph.png" height="300px"/>
 <p>Our first model was a Linear Regression Model trained on the data from 2007 to 2018. It predicted stock volatility for 2019, which, in combination with  Modern Portfolio Theory (MPT), and a risk aversion coefficent, could be used to determine daily Stock/Bond portfolio allocation.</p>
-<img src="media/OptimalRiskGraph.png" />
+<img src="media/OptimalRiskGraph.png" height="300px" />
 <p>Once we had this model, we could find the optimal risk aversion coefficent to maximize the Sharpe Ratio for our strategy. The S&P500 has a Sharpe Ratio of 0.535, while our model had one of 0.870. This let us conclude that we had made a safer strategy for investors than Buy-and-Hold.</p>
 
 ## Model 2: Neural Network
 
-<img src="media/NeuralNetwork_Portfolio.png" />
+<img src="media/NeuralNetwork_Portfolio.png" height="300px"/>
 <p>Now that we had a safer strategy, we wanted to try to be more profitable than Buy-and-Hold. To do this, we thought our best attempt was a Neural Network. We trained the network on the market data for 2007-2018, and it was able to beat Buy-and-Hold by about 130%. ...However, this result only had a P value of 0.769, so we were unable to confidently conclude our model truly was more profitable than Buy-and-Hold. (However, if we assume this is an efficent market, the fact we cannot confidently beat it is expected)</p>
 
 ## Conclusions
