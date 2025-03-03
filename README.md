@@ -14,7 +14,7 @@
 
 ## Data Analysis
 
-<img src="media/BearBullGraph2.png" height="300px"/>
+<img src="media/BearBullGraph.png" height="300px"/>
 <p>We were able to find some correlations between the probabilities and market trends, as well as verify the accuracy of the provided predictions (97.39%). This gave us the confidence to move forward and use this data to train some AI/ML Models.<p>
 <p>To see our visualizations, check out and run the files in 'data-visualizations/'. To see our data analysis scripts, check out 'python-data-analysis/'.</p>
 
